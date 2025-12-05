@@ -113,25 +113,79 @@ st.set_page_config(
 
 st.markdown("""
 <style>
+/* CSS Variables for Theme Support */
+:root {
+    --bg-primary: #f5f7fb;
+    --bg-secondary: #ffffff;
+    --text-primary: #111827;
+    --text-secondary: #6b7280;
+    --sidebar-bg: linear-gradient(180deg, #020617 0%, #111827 40%, #020617 100%);
+    --sidebar-text: #f1f5f9;
+    --sidebar-label-text: #f1f5f9;
+    --card-shadow: rgba(15, 23, 42, 0.08);
+    --metric-text: #ffffff;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg-primary: #0f172a;
+        --bg-secondary: #1e293b;
+        --text-primary: #f1f5f9;
+        --text-secondary: #cbd5e1;
+        --sidebar-bg: linear-gradient(180deg, #0f172a 0%, #1e293b 40%, #0f172a 100%);
+        --sidebar-text: #e2e8f0;
+        --card-shadow: rgba(0, 0, 0, 0.3);
+        --metric-text: #f1f5f9;
+    }
+}
+
 /* App background */
 .stApp {
-    background-color: #f5f7fb;
+    background-color: var(--bg-primary);
 }
 
 /* Sidebar styling */
 [data-testid="stSidebar"] {
-    background: linear-gradient(180deg, #020617 0%, #111827 40%, #020617 100%);
+    background: var(--sidebar-bg);
     padding: 1.25rem 0.75rem;
 }
 
-/* Sidebar radio label */
+/* Sidebar radio label - white in light mode */
 [data-testid="stSidebar"] label {
+    color: #ffffff;
+    font-weight: 500;
+}
+
+[data-testid="stSidebar"] [role="radiogroup"] label {
+    color: #ffffff;
+}
+
+/* Sidebar text elements */
+[data-testid="stSidebar"] p {
     color: #e5e7eb;
-    font-weight: 500
+}
+
+[data-testid="stSidebar"] div {
+    color: #e5e7eb;
+}
+
+/* Dark mode adjustments for sidebar */
+@media (prefers-color-scheme: dark) {
+    [data-testid="stSidebar"] label {
+        color: #e2e8f0;
+    }
+    
+    [data-testid="stSidebar"] p {
+        color: #cbd5e1;
+    }
+    
+    [data-testid="stSidebar"] div {
+        color: #cbd5e1;
+    }
 }
 
 .sidebar-nav-title {
-    color: #9ca3af;
+    color: #d1d5db;
     font-size: 0.8rem;
     letter-spacing: 0.08em;
     text-transform: uppercase;
@@ -140,34 +194,50 @@ st.markdown("""
 }
 
 .sidebar-nav-help {
-    color: #6b7280;
+    color: #9ca3af;
     font-size: 0.8rem;
     margin-bottom: 1.0rem;
 }
 
+@media (prefers-color-scheme: dark) {
+    .sidebar-nav-title {
+        color: #94a3b8;
+    }
+    
+    .sidebar-nav-help {
+        color: #64748b;
+    }
+}
+
 /* Big title */
-h1 {
-    color: #111827
+h1, h2, h3, h4, h5, h6 {
+    color: var(--text-primary);
 }
 
 /* Card-like containers */
 .card {
-    background-color: white;
+    background-color: var(--bg-secondary);
     padding: 1rem 1.5rem;
     border-radius: 0.75rem;
     margin-bottom: 1.25rem;
-    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08);
+    box-shadow: 0 2px 8px var(--card-shadow);
+    color: var(--text-primary);
 }
 
 /* Section subtitles */
 h3, h4 {
-    color: #1f2937;    
+    color: var(--text-primary);
 }
 
 /* Metrics */
 [data-testid="stMetricValue"] {
-    color: #ffffff;
+    color: var(--metric-text);
     font-weight: 600;
+}
+
+/* General text and markdown */
+p, div, span {
+    color: var(--text-primary);
 }
 </style>
 """, unsafe_allow_html = True)
