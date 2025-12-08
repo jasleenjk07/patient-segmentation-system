@@ -1,21 +1,28 @@
-# 🩺 Patient Segmentation System Using Unsupervised & Reinforcement Learning
+# 🩺 Patient Segmentation System (Premium AI Edition)
 
-A **Preventive Healthcare Recommendation System** built using the **NHANES medical dataset**, applying **UMAP + KMeans clustering** to group patients into health-based categories and **Q-Learning Reinforcement Learning** to determine the best preventive health action for each cluster.
-
-The system also includes an **interactive Streamlit dashboard** that allows users to:
-- Explore cluster-level insights
-- Visualize patient distribution
-- Enter personal health parameters
-- Receive personalized preventive recommendations
+A high-performance **Preventive Healthcare Recommendation System** leveraging **Unsupervised Learning (UMAP + KMeans)** for patient segmentation and **Reinforcement Learning (Q-Learning)** for personalized health interventions.
 
 ---
 
-## 🚀 Project Objectives
+## 🚀 Key Features
 
-- Identify meaningful patient segments based on medical, dietary, lab, and lifestyle variables
-- Predict the most beneficial preventive action per segment using reinforcement learning
-- Provide **cluster-level and personalized recommendations**
-- Help clinicians understand metabolic & lifestyle-related health risks
+### 1. 🧠 Advanced ML Pipeline
+- **Dataset**: Built on **NHANES** (CDC) data including physiological, dietary, and lab metrics.
+- **Clustering**: **UMAP** dimensionality reduction + **KMeans** clustering identifies 9 distinct patient profiles (e.g., "Middle-Aged Metabolic Risk", "Healthy Youth").
+- **Recommendation Engine**: **Q-Learning Policy** determines the optimal lifestyle action for each cluster to maximize long-term health rewards.
+
+### 2. � Premium Web Dashboard
+A modern, dark-themed Flask application featuring:
+- **Interactive Visualizations**: 
+    - **Radar Charts**: Compare your vitals (BMI, BP, Calories) against your cluster average.
+    - **Cluster Galaxy Map**: See your exact position in the patient universe (Scatter Plot).
+- **"What-If" Health Simulator**:
+    - Gamified controls (Sliders) to simulate weight loss or diet changes.
+    - Instantly updates prediction and recommended actions.
+- **Batch Processing**:
+    - Upload CSV files to analyze hundreds of patients at once.
+- **PDF Reporting**:
+    - Generate professional medical reports for clinical use.
 
 ---
 
@@ -23,100 +30,72 @@ The system also includes an **interactive Streamlit dashboard** that allows user
 
 | Component | Technology |
 |----------|------------|
-| **Programming Language** | Python |
-| **Unsupervised Clustering** | UMAP + KMeans |
-| **Reinforcement Learning** | Q-Learning |
-| **Dashboard** | Streamlit |
-| **Web UI (optional)** | Flask + TailwindCSS |
-| **Visualization** | Matplotlib, Seaborn |
-| **Model Persistence** | Joblib |
-| **Dataset** | NHANES (CDC Public Dataset) |
+| **Backend** | Python, Flask |
+| **ML Libraries** | Scikit-Learn, UMAP-Learn, Pandas, NumPy |
+| **Frontend** | HTML5, TailwindCSS (CDN), Chart.js |
+| **Reporting** | ReportLab (PDF) |
+| **Persistence** | Joblib |
 
 ---
 
-## 📁 Project Structure
+## 🛠️ Usage Guide
+
+### Prerequisities
+```bash
+pip install -r requirements.txt
+pip install reportlab umap-learn flask pandas numpy scikit-learn
+```
+
+### 1. Run the Application
+```bash
+python flask_app.py
+```
+Visit **http://127.0.0.1:5000/** in your browser.
+
+### 2. Dashboard Workflow
+- **Input Vitals**: Enter Age, Gender, BMI, BP, and Calories.
+- **Run Analysis**: Get your **Identified Segment** and **AI Recommendation**.
+- **Visuals**: Check the **Radar Chart** to see which metric is driving your risk.
+- **Simulation**: Scroll down to the **Simulator** to see how lowering your BMI affects your segment.
+- **Report**: Click **Download Medical Report** to save a PDF.
+
+### 3. Batch Analysis
+- Scroll to the **Batch Analysis** section.
+- Upload a CSV with columns: `Age`, `Gender`, `BMI`, `SBP`, `DBP`, `Calories`.
+- Download the processed results with appended predictions.
+
+---
+
+## 📂 Project Structure
+```
 patient-segmentation-system/
-│
-├── data/
-│   └── processed/
-│       └── final_recommendation_system.csv
-│
-├── models/
+├── flask_app.py           # Main Web Application (Flask)
+├── app.py                 # (Legacy) Streamlit Dashboard
+├── assets/                # CSS/Images
+├── utils/                 # Helper functions
+├── models/                # Pre-trained .pkl models
 │   ├── scaler.pkl
 │   ├── umap.pkl
 │   ├── kmeans_umap.pkl
 │   ├── feature_columns.pkl
-│   ├── cluster_names.pkl
-│   ├── actions.pkl
-│   └── cluster_to_learned_action.pkl
-│
-├── notebooks/
-│   ├── preprocessing.ipynb
-│   ├── clustering_umap_kmeans.ipynb
-│   ├── reinforcement_learning.ipynb
-│   └── visualization.ipynb
-│
-├── app.py                           # Streamlit Dashboard
-├── flask_app.py                     # Flask + Tailwind demo UI
-└── README.md
+│   ├── cluster.pkl
+│   └── policy.pkl
+└── README.md              # Documentation
+```
 
 ---
 
-## 🧠 Machine Learning Workflow
+## 🧠 Model Details
 
-### **1. Data Preparation**
-- Merged multiple NHANES segments (demographics, dietary, labs, medications, exam)
-- Cleaned missing values and standardized features
-- Created engineered risk features
+### Unsupervised Learning (Clustering)
+- **UMAP (n_components=2)**: Reduces 40+ medical features to 2 dimensions for visualization and density-based clustering.
+- **KMeans (k=9)**: Groups patients into actionable segments.
 
-### **2. Unsupervised Learning (Clustering)**
-- Dimensionality reduction using **UMAP (n_components = 2)**
-- Cluster formation using **KMeans (k = 9)**
-- Manual labeling of clusters for interpretability
-
-Example cluster names:
-
-| Cluster | Name |
-|---------|------|
-| 0 | Middle-aged Metabolic Risk |
-| 1 | Healthy Youth |
-| 2 | Young Lifestyle Shift |
-| 3 | Fit Adults |
-| 4 | Elderly Chronic Condition |
-| 5 | High Sugar/Fat Consumers |
-| 6 | Unhealthy Youth |
-| 7 | Alcohol-associated Metabolic Risk |
-| 8 | Moderate-Risk Adults |
+### Reinforcement Learning
+- **State Space**: The 9 Cluster IDs.
+- **Action Space**: 30+ standardized health interventions (e.g., "Increase cardio", "Reduce sodium").
+- **Reward Signal**: Based on improvement in cardiovascular risk scores.
 
 ---
 
-### **3. Reinforcement Learning — Q-Learning**
-- **State** = Cluster ID
-- **Action** = Preventive recommendation (e.g., reduce alcohol, increase exercise)
-- **Reward** = Simulated improvement in health outcomes
-- Learned optimal action for each cluster using Q-Table updates
-
-Example RL Output:
-Cluster 0 → Quit smoking & nutritional coaching
-Cluster 1 → Maintain exercise & healthy habits
-Cluster 7 → Reduce alcohol consumption
-Cluster 4 → Regular doctor follow-up
-
----
-
-## 📊 Dashboard Features (Streamlit)
-
-| Page | Description |
-|--------|-------------|
-| 🏠 **Overview** | Summary of problem, methods, dataset statistics |
-| 🧬 **Cluster Segmentation** | UMAP scatter plot + cluster distribution bar chart |
-| 📊 **Cluster Profiles** | Mean health indicators and top actions |
-| 👤 **Personalized Recommendation** | User form → cluster prediction → RL recommendation |
-
----
-
-## ▶️ Run the Dashboard
-
-### **Install dependencies**
-```bash
-pip install -r requirements.txt
+*Built for the Advanced Agentic Coding Project.*
