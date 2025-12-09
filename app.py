@@ -113,188 +113,276 @@ st.set_page_config(
 
 st.markdown("""
 <style>
-/* CSS Variables for Theme Support */
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+/* --- ROOT VARIABLES --- */
 :root {
-    --bg-primary: #f5f7fb;
-    --bg-secondary: #ffffff;
-    --text-primary: #111827;
-    --text-secondary: #6b7280;
-    --sidebar-bg: linear-gradient(180deg, #020617 0%, #111827 40%, #020617 100%);
-    --sidebar-text: #f1f5f9;
-    --sidebar-label-text: #f1f5f9;
-    --card-shadow: rgba(15, 23, 42, 0.08);
-    --metric-text: #ffffff;
+    --bg-app: #020617;
+    --bg-card: rgba(30, 41, 59, 0.4);
+    --border-card: rgba(255, 255, 255, 0.08);
+    --text-primary: #f1f5f9;
+    --text-secondary: #94a3b8;
+    --accent: #14b8a6; /* Teal 500 */
+    --accent-hover: #0d9488;
 }
 
-@media (prefers-color-scheme: dark) {
-    :root {
-        --bg-primary: #0f172a;
-        --bg-secondary: #1e293b;
-        --text-primary: #f1f5f9;
-        --text-secondary: #cbd5e1;
-        --sidebar-bg: linear-gradient(180deg, #0f172a 0%, #1e293b 40%, #0f172a 100%);
-        --sidebar-text: #e2e8f0;
-        --card-shadow: rgba(0, 0, 0, 0.3);
-        --metric-text: #f1f5f9;
-    }
-}
-
-/* App background */
+/* --- GLOBAL LAYOUT --- */
 .stApp {
-    background-color: var(--bg-primary);
+    background-color: var(--bg-app);
+    background-image: 
+        radial-gradient(at 0% 0%, rgba(20, 184, 166, 0.1) 0px, transparent 40%),
+        radial-gradient(at 100% 100%, rgba(99, 102, 241, 0.1) 0px, transparent 40%);
+    font-family: 'Plus Jakarta Sans', sans-serif;
 }
 
-/* Sidebar styling */
-[data-testid="stSidebar"] {
-    background: var(--sidebar-bg);
-    padding: 1.25rem 0.75rem;
-}
-
-/* Sidebar radio label - white in light mode */
-[data-testid="stSidebar"] label {
-    color: #ffffff;
-    font-weight: 500;
-}
-
-[data-testid="stSidebar"] [role="radiogroup"] label {
-    color: #ffffff;
-}
-
-/* Sidebar text elements */
-[data-testid="stSidebar"] p {
-    color: #e5e7eb;
-}
-
-[data-testid="stSidebar"] div {
-    color: #e5e7eb;
-}
-
-/* Dark mode adjustments for sidebar */
-@media (prefers-color-scheme: dark) {
-    [data-testid="stSidebar"] label {
-        color: #e2e8f0;
-    }
-    
-    [data-testid="stSidebar"] p {
-        color: #cbd5e1;
-    }
-    
-    [data-testid="stSidebar"] div {
-        color: #cbd5e1;
-    }
-}
-
-.sidebar-nav-title {
-    color: #d1d5db;
-    font-size: 0.8rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    margin-bottom: 0.5rem;
-    font-weight: 600;
-}
-
-.sidebar-nav-help {
-    color: #9ca3af;
-    font-size: 0.8rem;
-    margin-bottom: 1.0rem;
-}
-
-@media (prefers-color-scheme: dark) {
-    .sidebar-nav-title {
-        color: #94a3b8;
-    }
-    
-    .sidebar-nav-help {
-        color: #64748b;
-    }
-}
-
-/* Big title */
+/* Headings */
 h1, h2, h3, h4, h5, h6 {
-    color: var(--text-primary);
+    font-family: 'Outfit', sans-serif !important;
+    color: var(--text-primary) !important;
+    font-weight: 700 !important;
 }
 
-/* Card-like containers */
-.card {
-    background-color: var(--bg-secondary);
-    padding: 1rem 1.5rem;
-    border-radius: 0.75rem;
-    margin-bottom: 1.25rem;
-    box-shadow: 0 2px 8px var(--card-shadow);
-    color: var(--text-primary);
+/* Sidebar */
+[data-testid="stSidebar"] {
+    background-color: #0f172a;
+    border-right: 1px solid var(--border-card);
 }
 
-/* Section subtitles */
-h3, h4 {
-    color: var(--text-primary);
+/* --- COMPONENTS: CARDS --- */
+/* Custom HTML Card Class */
+.custom-card {
+    background: var(--bg-card);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--border-card);
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 24px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
 }
 
-/* Metrics */
-[data-testid="stMetricValue"] {
-    color: var(--metric-text);
+/* Streamlit Forms -> Styled as Cards */
+[data-testid="stForm"] {
+    background: var(--bg-card);
+    backdrop-filter: blur(16px);
+    border: 1px solid var(--border-card);
+    border-radius: 16px;
+    padding: 32px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+}
+
+/* Card style for Dataframes and Charts */
+[data-testid="stDataFrame"], [data-testid="stImage"], [data-testid="stArrowChart"] {
+    background: var(--bg-card);
+    backdrop-filter: blur(16px);
+    border: 1px solid var(--border-card);
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+}
+
+/* Widgets (Inputs, Selects) */
+.stTextInput > div > div > input, 
+.stNumberInput > div > div > input, 
+.stSelectbox > div > div > div {
+    background-color: rgba(15, 23, 42, 0.6) !important;
+    color: var(--text-primary) !important;
+    border: 1px solid var(--border-card) !important;
+    border-radius: 10px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+.stTextInput > div > div > input:focus, 
+.stNumberInput > div > div > input:focus {
+    border-color: var(--accent) !important;
+    box-shadow: 0 0 0 2px rgba(20, 184, 166, 0.2) !important;
+}
+
+/* Buttons */
+.stButton > button {
+    background: linear-gradient(135deg, #14b8a6 0%, #0d9488 100%);
+    color: white !important;
+    border: none;
+    border-radius: 12px;
+    padding: 0.6rem 1.2rem;
     font-weight: 600;
+    transition: all 0.2s;
+}
+.stButton > button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(20, 184, 166, 0.3);
 }
 
-/* General text and markdown */
-p, div, span {
-    color: var(--text-primary);
+/* Metrics (Custom HTML preferred, but styling default for safety) */
+[data-testid="stMetricValue"] {
+    color: #fff !important;
+    font-family: 'Outfit', sans-serif;
 }
+[data-testid="stMetricLabel"] {
+    color: var(--accent) !important;
+}
+
+/* Charts */
+button[title="View fullscreen"] {
+    display: none; /* Hide clutter */
+}
+
+/* --- NAVIGATION CUSTOMIZATION --- */
+/* Sidebar Radio Group */
+[data-testid="stSidebar"] div[role="radiogroup"] {
+    background: transparent;
+    border: none;
+    flex-direction: column;
+    gap: 12px;
+    padding: 0;
+}
+
+/* Sidebar Radio Items (Labels) */
+[data-testid="stSidebar"] label {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 12px 16px;
+    width: 100%;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    margin: 0 !important;
+}
+
+/* Hover Effect */
+[data-testid="stSidebar"] label:hover {
+    background-color: rgba(20, 184, 166, 0.2) !important;
+    border-color: rgba(20, 184, 166, 0.5);
+    transform: translateX(5px);
+}
+
+/* Typography inside labels */
+[data-testid="stSidebar"] label > div[data-testid="stMarkdownContainer"] > p {
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    color: var(--text-primary) !important;
+    margin: 0;
+}
+
+
 </style>
 """, unsafe_allow_html = True)
 
-st.title("🩺 Patient Segmentation System for Preventive Healthcare Planning")
-st.markdown("### NHANES-based Unsupervised + Reinforcement Learning Recommendation System")
-
-# Sidebar navigation
+# Sidebar Navigation
 with st.sidebar:
-    st.markdown(
-        """
-        <div class="sidebar-nav-title">Navigation</div>
-        <div class="sidebar-nav-help">
-            Explore segments, understand cluster profiles, and get personalized recommendations.
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
-
+    st.markdown("### 🧭 Menu")
     page = st.radio(
         "",
-        [
-            "🏠 Overview",
-            "🧬 Cluster Segmentation",
-            "📊 Cluster Profiles",
-            "👤 Personalized Recommendation",
-        ]
+        ["🏠 Overview", "🧬 Cluster Segmentation", "📊 Cluster Profiles", "👤 Personalized Recommendation"],
+        label_visibility="collapsed"
     )
+
+st.title("🩺 Patient Segmentation System for Preventive Healthcare Planning")
+st.markdown("### NHANES-based Unsupervised + Reinforcement Learning Recommendation System")
+st.markdown("---")
 
 # ------------------------------
 # Page 1: Overview
 # ------------------------------
 if page == "🏠 Overview":
-    st.subheader("📌 Project Overview")
+    # Hero Section
+    st.markdown("""
+    <div style="text-align: center; padding: 40px 0 60px 0;">
+        <div style="font-size: 64px; margin-bottom: 20px; animation: float 6s ease-in-out infinite;">🩺</div>
+        <h1 style="background: linear-gradient(135deg, #2dd4bf 0%, #ccfbf1 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 56px; font-weight: 800; margin-bottom: 24px; letter-spacing: -0.02em;">
+            Patient Intelligence
+        </h1>
+        <p style="font-size: 20px; color: #94a3b8; max-width: 700px; margin: 0 auto 40px; line-height: 1.6;">
+            Advanced patient segmentation system leveraging <strong>Unsupervised Learning</strong> to transform complex NHANES data into actionable preventive healthcare strategies.
+        </p>
+    </div>
+
+    <!-- Features Grid -->
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 60px;">
+        <div class="custom-card" style="text-align: center; padding: 32px 24px;">
+            <div style="font-size: 40px; margin-bottom: 16px;">🧬</div>
+            <h3 style="color: white; font-weight: 700; margin-bottom: 12px;">Smart Clustering</h3>
+            <p style="font-size: 14px; color: #94a3b8; line-height: 1.5;">
+                Powered by <strong>UMAP</strong> and <strong>KMeans</strong> to identify distinct, clinically relevant patient subgroups from high-dimensional data.
+            </p>
+        </div>
+        <div class="custom-card" style="text-align: center; padding: 32px 24px;">
+            <div style="font-size: 40px; margin-bottom: 16px;">📊</div>
+            <h3 style="color: white; font-weight: 700; margin-bottom: 12px;">Visual Insights</h3>
+            <p style="font-size: 14px; color: #94a3b8; line-height: 1.5;">
+                Interactive <strong>cluster profiles</strong> and distributions help uncover medication usage patterns and risk factors.
+            </p>
+        </div>
+        <div class="custom-card" style="text-align: center; padding: 32px 24px;">
+            <div style="font-size: 40px; margin-bottom: 16px;">🎯</div>
+            <h3 style="color: white; font-weight: 700; margin-bottom: 12px;">Actionable AI</h3>
+            <p style="font-size: 14px; color: #94a3b8; line-height: 1.5;">
+                Reinforcement Learning inspired rules engine provides <strong>personalized preventive recommendations</strong>.
+            </p>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    st.markdown("<h3 style='text-align: center; margin-bottom: 32px; color: white;'>System Status</h3>", unsafe_allow_html=True)
+
+    # Custom Stat Cards (Data Ticker)
+    st.markdown(f"""
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 32px;">
+        <div class="custom-card">
+            <div style="font-size: 14px; text-transform: uppercase; color: #94a3b8; font-weight: 600; letter-spacing: 0.05em;">Total Patients</div>
+            <div style="font-size: 32px; font-weight: 700; font-family: 'Outfit', sans-serif; color: white;">{len(df):,}</div>
+            <div style="font-size: 12px; color: #14b8a6;">In Data Warehouse</div>
+        </div>
+        <div class="custom-card">
+            <div style="font-size: 14px; text-transform: uppercase; color: #94a3b8; font-weight: 600; letter-spacing: 0.05em;">Active Clusters</div>
+            <div style="font-size: 32px; font-weight: 700; font-family: 'Outfit', sans-serif; color: white;">{df["Cluster"].nunique()}</div>
+            <div style="font-size: 12px; color: #8b5cf6;">Segmentation Profiles</div>
+        </div>
+        <div class="custom-card">
+            <div style="font-size: 14px; text-transform: uppercase; color: #94a3b8; font-weight: 600; letter-spacing: 0.05em;">Strategies</div>
+            <div style="font-size: 32px; font-weight: 700; font-family: 'Outfit', sans-serif; color: white;">{len(actions)}</div>
+            <div style="font-size: 12px; color: #f59e0b;">Preventive Pathways</div>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
 
     st.markdown("""
-    This dashboard showcases a **Patient Segmentation System** built using the NHANES dataset.
-
-    **Techniques Used:**
-    - Unsupervised Learning: UMAP + KMeans for patient clustering
-    - Reinforcement Learning (Q-Learning): to learn the best preventive action per cluster
-    - Multi-source data: Demographics, Labs, Examination, Diet, Medications, Questionairre
-    """)
-
-    col1, col2, col3 = st.columns(3)
-    with col1:
-        st.metric("Number of Patients", f"{len(df):,}")
-    with col2:
-        st.metric("Number of Clusters", df["Cluster"].nunique())
-    with col3:
-        st.metric("Recommendation Types", len(actions))
-
-    st.markdown("### Pipeline")
-    st.markdown("""
-    `Raw NHANES Data → Cleaning & Feature Engineering → UMAP(Dimensionality Reduction)
-    → KMeans Clustering → Q-Learning Policy → RL-based Health Recommendations`
-    """)
+<h3 style="text-align: center; margin-bottom: 24px; color: white;">Processing Pipeline</h3>
+<div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; align-items: center; margin-bottom: 40px;">
+<!-- Step 1 -->
+<div style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 16px 24px; text-align: center;">
+<div style="font-size: 24px; margin-bottom: 8px;">📂</div>
+<div style="font-size: 14px; font-weight: 600; color: #e2e8f0;">NHANES Data</div>
+</div>
+<div style="color: #64748b; font-size: 24px;">→</div>
+<!-- Step 2 -->
+<div style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 16px 24px; text-align: center;">
+<div style="font-size: 24px; margin-bottom: 8px;">🧹</div>
+<div style="font-size: 14px; font-weight: 600; color: #e2e8f0;">Preprocessing</div>
+</div>
+<div style="color: #64748b; font-size: 24px;">→</div>
+<!-- Step 3 -->
+<div style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 16px 24px; text-align: center;">
+<div style="font-size: 24px; margin-bottom: 8px;">📉</div>
+<div style="font-size: 14px; font-weight: 600; color: #e2e8f0;">UMAP Reduction</div>
+</div>
+<div style="color: #64748b; font-size: 24px;">→</div>
+<!-- Step 4 -->
+<div style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 16px 24px; text-align: center;">
+<div style="font-size: 24px; margin-bottom: 8px;">🧬</div>
+<div style="font-size: 14px; font-weight: 600; color: #e2e8f0;">KMeans Clustering</div>
+</div>
+<div style="color: #64748b; font-size: 24px;">→</div>
+<!-- Step 5 -->
+<div style="background: rgba(20, 184, 166, 0.1); border: 1px solid rgba(20, 184, 166, 0.3); border-radius: 12px; padding: 16px 24px; text-align: center;">
+<div style="font-size: 24px; margin-bottom: 8px;">🤖</div>
+<div style="font-size: 14px; font-weight: 600; color: #2dd4bf;">RL Agent</div>
+</div>
+</div>
+""", unsafe_allow_html=True)
 
 
 # ------------------------------
@@ -319,23 +407,41 @@ elif page == "🧬 Cluster Segmentation":
 
     import matplotlib.pyplot as plt 
 
-    st.markdown('<div class = "card>', unsafe_allow_html = True)
     st.markdown("### 📍 UMAP Projection of Patient Clusters")
 
-    fig, ax = plt.subplots(figsize=(8,6))
+    fig, ax = plt.subplots(figsize=(10,7))
+    # Dark mode plotting
+    fig.patch.set_facecolor('none')
+    ax.set_facecolor('none')
+    
+    # Custom color cycle if needed, but default is okay. 
+    # Let's use a spectral map or just iterate.
+    cmap = plt.get_cmap("tab10")
 
-    for cname in sorted(plot_df["Cluster_Name"].unique()):
+    for i, cname in enumerate(sorted(plot_df["Cluster_Name"].unique())):
         subset = plot_df[plot_df["Cluster_Name"] == cname]
-        ax.scatter(subset["UMAP1"], subset["UMAP2"], s=10, label = cname, alpha = 0.7)
+        ax.scatter(subset["UMAP1"], subset["UMAP2"], s=15, label=cname, alpha=0.8, edgecolors='white', linewidths=0.1)
+
+    # Axis styling
+    ax.spines['bottom'].set_color('#cbd5e1')
+    ax.spines['left'].set_color('#cbd5e1') 
+    ax.spines['top'].set_visible(False)
+    ax.spines['right'].set_visible(False)
+    ax.tick_params(axis='x', colors='#cbd5e1')
+    ax.tick_params(axis='y', colors='#cbd5e1')
+    ax.yaxis.label.set_color('#cbd5e1')
+    ax.xaxis.label.set_color('#cbd5e1')
+    ax.title.set_color('white')
 
     ax.set_xlabel("UMAP1")
     ax.set_ylabel("UMAP2")
-    ax.set_title("UMAP-based Patient Segmentation")
-    ax.legend(markerscale = 2, fontsize = 8, bbox_to_anchor = (1.05,1), loc = "upper left")
-    st.pyplot(fig)
-    st.markdown("<div>", unsafe_allow_html = True)
+    # Legend styled
+    leg = ax.legend(markerscale=2, fontsize=9, bbox_to_anchor=(1.02, 1), loc="upper left", frameon=False)
+    for text in leg.get_texts():
+        text.set_color("#cbd5e1")
 
-    st.markdown('<div class = "card>', unsafe_allow_html = True)
+    st.pyplot(fig)
+
     st.markdown("### 📊 Cluster Size Distribution")
 
     cluster_counts = (
@@ -345,14 +451,25 @@ elif page == "🧬 Cluster Segmentation":
           .reset_index()
           .rename(columns = {"Cluster": "Count"})
     )
-    fig2, ax2 = plt.subplots(figsize=(8,4))
-    ax2.bar(cluster_counts["Cluster_Name"], cluster_counts["Count"])
-    ax2.set_xticklabels(cluster_counts["Cluster_Name"], rotation = 45, ha = "right")
+    
+    fig2, ax2 = plt.subplots(figsize=(10,5))
+    fig2.patch.set_facecolor('none')
+    ax2.set_facecolor('none')
+    
+    bars = ax2.bar(cluster_counts["Cluster_Name"], cluster_counts["Count"], color='#14b8a6')
+    
+    # Axis styling
+    ax2.spines['bottom'].set_color('#cbd5e1')
+    ax2.spines['left'].set_color('#cbd5e1')
+    ax2.spines['top'].set_visible(False)
+    ax2.spines['right'].set_visible(False)
+    ax2.tick_params(axis='x', colors='#cbd5e1', rotation=45)
+    ax2.tick_params(axis='y', colors='#cbd5e1')
+    ax2.yaxis.label.set_color('#cbd5e1')
+    
     ax2.set_ylabel("Number of Patients")
-    ax2.set_title("Number of Patients per Cluster")
-
+    
     st.pyplot(fig2)
-    st.markdown("</div>", unsafe_allow_html = True)
 # ------------------------------
 # Page 3: Cluster Profiles
 # ------------------------------
