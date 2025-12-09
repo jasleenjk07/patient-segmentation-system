@@ -94,6 +94,8 @@ patient-segmentation-system/
 │   ├── cluster.pkl
 │   └── policy.pkl
 └── README.md              # Documentation
+└── requirements.txt       # Project dependencies
+
 ```
 
 ---
