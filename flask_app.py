@@ -244,11 +244,11 @@ LANDING_HTML = """
                 <!-- Desktop Nav -->
                 <div class="hidden md:flex items-center gap-8">
                     <a href="#features" class="text-sm font-medium hover:text-white transition-colors">Features</a>
-                    <a href="#how-it-works" class="text-sm font-medium hover:text-white transition-colors">How it works</a>
+                    <a href="/how-it-works" class="text-sm font-medium hover:text-white transition-colors">How it works</a>
                     <a href="/dashboard" class="relative inline-flex h-10 overflow-hidden rounded-full p-[1px] focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50">
                         <span class="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2E8F0_0%,#0F766E_50%,#E2E8F0_100%)]"></span>
                         <span class="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full bg-slate-950 px-6 py-1 text-sm font-medium text-white backdrop-blur-3xl hover:bg-slate-900 transition-colors">
-                            Launch Dashboard
+                            Get Recommendation
                         </span>
                     </a>
                 </div>
@@ -1108,7 +1108,7 @@ HOW_IT_WORKS_HTML = """
             <div class="flex justify-between h-16 items-center">
                 <a href="/" class="flex items-center gap-3 group hover:opacity-80 transition">
                     <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-primary-500 to-primary-700 flex items-center justify-center text-white shadow-lg">
-                        ✅
+                        🩺
                     </div>
                     <span class="font-display font-bold text-lg text-white tracking-tight">
                         Patient<span class="text-primary-400">AI</span>
