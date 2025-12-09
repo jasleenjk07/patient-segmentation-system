@@ -1,10 +1,23 @@
 # 🩺 Patient Segmentation System (Premium AI Edition)
 
+## 🌐 Live Demo
+🔗 **Deployed Dashboard:** https://patient-segmentation-system-vyx8p6xp4gymtfyf2euypv.streamlit.app/
+
 A high-performance **Preventive Healthcare Recommendation System** leveraging **Unsupervised Learning (UMAP + KMeans)** for patient segmentation and **Reinforcement Learning (Q-Learning)** for personalized health interventions.
 
 ---
 
 ## 🚀 Key Features
+
+### 🎨 UI & Dashboard Enhancements
+- **Dual Theme Support**: Automatically adapts to **Dark / Light mode** with theme-aware text & card visibility.
+- **Improved Sidebar Navigation**: Icon-based clean navigation for better usability.
+- **Responsive Layout**: All pages optimized for desktop & laptop viewports.
+- **Interactive UMAP Cluster Visuals**: Multi-select filtering + animated hover effects.
+- **Styled User Input Forms**: Modern glass-effect input cards with hover states and validation hints.
+- **Batch Processing Panel**: Drag‑and‑drop CSV uploader with instant processing preview.
+- **PDF Report Generator**: Styled medical profile report with cluster insights and RL recommendation.
+- **What‑If Health Simulator UI**: Slider‑based gamified interface for user‑driven outcome forecasting.
 
 ### 1. 🧠 Advanced ML Pipeline
 - **Dataset**: Built on **NHANES** (CDC) data including physiological, dietary, and lab metrics.
